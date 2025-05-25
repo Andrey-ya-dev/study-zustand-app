@@ -5,6 +5,8 @@ import { addTen } from "./helpers/addTen";
 import Title from "antd/es/typography/Title";
 import { useTodoStore } from "./model/todoStore";
 import { useRef, useState, type KeyboardEvent } from "react";
+import { CloseOutlined } from "@ant-design/icons";
+import { CoffeePage } from "./pages/CoffeePage/CoffeePage";
 
 function App() {
   const { counter, increase, decrease } = useCounterStore();
@@ -78,12 +80,17 @@ function App() {
                     marginLeft: "auto",
                   }}
                 >
-                  &times;
+                  <CloseOutlined />
                 </Button>
               </Card>
             );
           })}
       </div>
+      <hr />
+      <Title type="warning" level={2}>
+        Coffee app
+      </Title>
+      <CoffeePage />
     </div>
   );
 }

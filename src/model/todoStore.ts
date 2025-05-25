@@ -17,6 +17,7 @@ type TodoActions = {
   changeDoneState: (id: string) => void;
 };
 
+// создается слайс для стора
 const todoSlice: StateCreator<
   TodoState & TodoActions,
   [["zustand/devtools", never]]
@@ -24,7 +25,6 @@ const todoSlice: StateCreator<
   return {
     items: [],
     addTodo(value) {
-      // Параметры для devtools
       set(
         (state) => ({
           ...state,
@@ -38,6 +38,7 @@ const todoSlice: StateCreator<
           ],
         }),
         false,
+        // Параметры для devtools
         `addTodo ${value}`
       );
     },
@@ -48,6 +49,7 @@ const todoSlice: StateCreator<
       }));
     },
     changeDoneState(id) {
+      // получение всего стора get
       const { items } = get();
       const copyItems = structuredClone(items);
       const todo = copyItems.find((t) => t.id === id);
@@ -55,10 +57,11 @@ const todoSlice: StateCreator<
       if (todo) {
         todo.isDone = !todo.isDone;
       }
-
+      // записть данных для стора set
       set((state) => ({ ...state, items: copyItems }));
     },
   };
 };
 
+// создается хук из слайса в 4й версии было create()(devtools(todoSlice)), для мидлвар
 export const useTodoStore = create(devtools(todoSlice));
