@@ -7,6 +7,7 @@ type CounterState = {
 type CounterActions = {
   increase: () => void;
   decrease: () => void;
+  changeByValue: (value: number) => void;
 };
 
 const counterSlice: StateCreator<CounterState & CounterActions> = (
@@ -23,7 +24,15 @@ const counterSlice: StateCreator<CounterState & CounterActions> = (
       const { counter } = get();
       set({ counter: counter - 1 });
     },
+    changeByValue(value) {
+      const { counter } = get();
+      set({ counter: counter + value });
+    },
   };
 };
 
 export const useCounterStore = create(counterSlice);
+
+export const getCounter = () => useCounterStore.getState().counter;
+export const changeByValue = (value: number) =>
+  useCounterStore.getState().changeByValue(value);
