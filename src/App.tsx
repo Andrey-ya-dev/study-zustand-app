@@ -9,7 +9,7 @@ import { CloseOutlined } from "@ant-design/icons";
 import { CoffeePage } from "./pages/CoffeePage/CoffeePage";
 
 function App() {
-  const { counter, increase, decrease } = useCounterStore();
+  const { counter, increase, decrease, persistedCounter } = useCounterStore();
   const { items, addTodo, removeTodo, changeDoneState } = useTodoStore();
   const inputRef = useRef<InputRef | null>(null);
 
@@ -37,7 +37,7 @@ function App() {
       <hr />
       <div className="section">
         <Button onClick={increase}>+</Button>
-        <span>{counter}</span>
+        <span>{counter}</span>|<span>{persistedCounter}</span>
         <Button onClick={decrease}>-</Button>
         <Button onClick={addTen}>by value</Button>
       </div>

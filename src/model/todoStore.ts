@@ -63,5 +63,5 @@ const todoSlice: StateCreator<
   };
 };
 
-// создается хук из слайса в 4й версии было create()(devtools(todoSlice)), для мидлвар
+// создается хук из слайса или create<T>()(devtools(todoSlice)), для мидлвар с указанием типов
 export const useTodoStore = create(devtools(todoSlice));
