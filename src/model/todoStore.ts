@@ -1,5 +1,6 @@
-import { create, type StateCreator } from "zustand";
+import { type StateCreator } from "zustand";
 import { devtools } from "zustand/middleware";
+import { create } from "../helpers/create";
 
 type TodoType = {
   id: string;
@@ -64,4 +65,6 @@ const todoSlice: StateCreator<
 };
 
 // создается хук из слайса или create<T>()(devtools(todoSlice)), для мидлвар с указанием типов
-export const useTodoStore = create(devtools(todoSlice));
+export const useTodoStore = create<TodoState & TodoActions>()(
+  devtools(todoSlice)
+);

@@ -1,4 +1,5 @@
 import { create, type StateCreator } from "zustand";
+import { devtools } from "zustand/middleware";
 import type { CoffeType, GetCofeeListParams } from "../types/coffeTypes";
 import axios from "axios";
 
@@ -46,4 +47,6 @@ const coffeeSlice: StateCreator<CoffeeState & CoffeeActions> = (set, get) => {
 };
 
 // 4. Хук
-export const useCoffeeStore = create(coffeeSlice);
+export const useCoffeeStore = create<CoffeeState & CoffeeActions>()(
+  devtools(coffeeSlice)
+);

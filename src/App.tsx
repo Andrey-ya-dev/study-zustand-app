@@ -7,9 +7,11 @@ import { useTodoStore } from "./model/todoStore";
 import { useRef, useState, type KeyboardEvent } from "react";
 import { CloseOutlined } from "@ant-design/icons";
 import { CoffeePage } from "./pages/CoffeePage/CoffeePage";
+import { resetAllStores } from "./helpers/create";
 
 function App() {
-  const { counter, increase, decrease, persistedCounter } = useCounterStore();
+  const { counter, increase, decrease, persistedCounter, resetStore } =
+    useCounterStore();
   const { items, addTodo, removeTodo, changeDoneState } = useTodoStore();
   const inputRef = useRef<InputRef | null>(null);
 
@@ -40,6 +42,8 @@ function App() {
         <span>{counter}</span>|<span>{persistedCounter}</span>
         <Button onClick={decrease}>-</Button>
         <Button onClick={addTen}>by value</Button>
+        <Button onClick={resetStore}>resetStore</Button>
+        <Button onClick={resetAllStores}>resetAllStores</Button>
       </div>
       <hr />
       <Title type="warning" level={2}>
