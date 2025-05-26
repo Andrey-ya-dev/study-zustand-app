@@ -2,7 +2,7 @@
 
 ### Стек:
 
-- React, TS, CSS modules, Zustand, React router, Vite, ES lint, axios, ant-design
+- React, TS, CSS, Zustand, React router, Vite, ES lint, axios, ant-design
 
 ## Установка и запуск
 

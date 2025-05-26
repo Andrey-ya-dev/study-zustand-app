@@ -2,9 +2,13 @@ export type CoffeType = {
   id: number;
   name: string;
   subTitle: string;
-  type: "L";
+  type: string;
   price: number;
   image: string;
   description: string;
   rating: number;
+};
+
+export type GetCofeeListParams = {
+  text?: string;
 };

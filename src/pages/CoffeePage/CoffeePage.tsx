@@ -1,7 +1,7 @@
-import { Button, Card, Rate, Tag } from "antd";
+import { Button, Card, Input, Rate, Tag } from "antd";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { useCoffeeStore } from "../../model/coffeeStore";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import "./CoffeePage.css";
 
@@ -11,6 +11,12 @@ export type CoffeePageProps = {
 
 export function CoffeePage({ className }: CoffeePageProps) {
   const { coffeeList, getCoffeeList } = useCoffeeStore();
+  const [searchValue, setSeatchValue] = useState("");
+
+  const handleSearch = (text: string) => {
+    getCoffeeList({ text });
+    setSeatchValue(text);
+  };
 
   useEffect(() => {
     getCoffeeList();
@@ -18,6 +24,16 @@ export function CoffeePage({ className }: CoffeePageProps) {
 
   return (
     <div style={{ width: "100%" }}>
+      <Input
+        style={{
+          maxWidth: 300,
+          marginLeft: "50%",
+          transform: "translateX(-50%)",
+        }}
+        placeholder="Search"
+        value={searchValue}
+        onChange={(e) => handleSearch(e.target.value)}
+      />
       {coffeeList && (
         <div className={`cardsContainer ${className || ""}`}>
           {coffeeList.map((coffee) => (
