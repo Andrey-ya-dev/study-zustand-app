@@ -7,6 +7,7 @@ import "./CoffeePage.css";
 
 export type CoffeePageProps = {
   className?: string;
+  test?: string;
 };
 
 export function CoffeePage({ className }: CoffeePageProps) {
