@@ -1,0 +1,16 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.title-section {
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  padding: 20px;
+  padding-top: 0;
+}
+
+.section {
+  box-sizing: border-box;
+}
