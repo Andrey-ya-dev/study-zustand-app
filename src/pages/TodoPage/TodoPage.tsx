@@ -46,7 +46,7 @@ export function TodoPage() {
                 <Card
                   onClick={() => changeDoneState(todo.id)}
                   key={todo.id}
-                  className="card"
+                  className={cls["card"]}
                 >
                   <span>
                     <Checkbox checked={todo.isDone} />

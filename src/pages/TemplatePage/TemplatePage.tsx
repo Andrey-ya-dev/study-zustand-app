@@ -11,7 +11,7 @@ type TemplatePageProps = {
 export function TemplatePage({
   titleSection,
   children,
-  classNameSection,
+  classNameSection = "",
 }: TemplatePageProps) {
   return (
     <div className={cls["wrapper"]}>
