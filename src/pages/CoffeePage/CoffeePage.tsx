@@ -1,9 +1,10 @@
-import { Button, Card, Input, Rate, Tag } from "antd";
-import { ShoppingCartOutlined } from "@ant-design/icons";
+import { Input } from "antd";
 import { useCoffeeStore } from "../../model/coffeeStore";
 import { useEffect, useState } from "react";
 
-import "./CoffeePage.css";
+import cls from "./CoffeePage.module.css";
+import { TemplatePage } from "../TemplatePage/TemplatePage";
+import { CoffeeCard } from "./CoffeeCard";
 
 export type CoffeePageProps = {
   className?: string;
@@ -11,7 +12,7 @@ export type CoffeePageProps = {
 };
 
 export function CoffeePage({ className }: CoffeePageProps) {
-  const { coffeeList, getCoffeeList } = useCoffeeStore();
+  const { coffeeList, getCoffeeList, addCoffeeToCart } = useCoffeeStore();
   const [searchValue, setSeatchValue] = useState("");
 
   const handleSearch = (text: string) => {
@@ -24,44 +25,27 @@ export function CoffeePage({ className }: CoffeePageProps) {
   }, []);
 
   return (
-    <div style={{ width: "100%" }}>
-      <Input
-        style={{
-          maxWidth: 300,
-          marginLeft: "50%",
-          transform: "translateX(-50%)",
-        }}
-        placeholder="Search"
-        value={searchValue}
-        onChange={(e) => handleSearch(e.target.value)}
-      />
+    <TemplatePage titleSection="Coffee app">
+      <div className={cls["search-input__box"]}>
+        <Input
+          style={{}}
+          placeholder="Search"
+          value={searchValue}
+          onChange={(e) => handleSearch(e.target.value)}
+          className={cls["search-input"]}
+        />
+      </div>
       {coffeeList && (
-        <div className={`cardsContainer ${className || ""}`}>
+        <div className={`${cls["cards-container"]} ${className || ""}`}>
           {coffeeList.map((coffee) => (
-            <Card
-              hoverable
+            <CoffeeCard
+              coffee={coffee}
               key={coffee.id}
-              cover={<img src={coffee.image} />}
-              actions={[
-                <Button icon={<ShoppingCartOutlined />} key={coffee.name}>
-                  {coffee.price}
-                </Button>,
-              ]}
-            >
-              <Card.Meta title={coffee.name} description={coffee.subTitle} />
-              <Tag style={{ marginTop: "24px" }} color="purple">
-                {coffee.type}
-              </Tag>
-              <Rate
-                defaultValue={coffee.rating}
-                disabled
-                allowHalf
-                style={{ marginTop: "24px" }}
-              />
-            </Card>
+              addCoffeeToCart={addCoffeeToCart}
+            />
           ))}
         </div>
       )}
-    </div>
+    </TemplatePage>
   );
 }
