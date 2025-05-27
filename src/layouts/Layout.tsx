@@ -1,6 +1,8 @@
-import { NavLink, Outlet } from "react-router";
+import { NavLink, Outlet, useLocation } from "react-router";
 
-import "./Layouts.css";
+import cls from "./Layouts.module.css";
+import Title from "antd/es/typography/Title";
+import { Cart } from "../pages/CoffeePage/Cart";
 
 type NavListItemProps = {
   href: string;
@@ -9,11 +11,11 @@ type NavListItemProps = {
 
 export function NavListItem({ href, linkTitle }: NavListItemProps) {
   return (
-    <li className="main-nav__list-item">
+    <li className={cls["main-nav__list-item"]}>
       <NavLink
         to={`${href}`}
         className={({ isActive }) =>
-          `main-nav__list-link ${isActive ? "active-link" : ""}`
+          `${cls["main-nav__list-link"]} ${isActive ? cls["active-link"] : ""}`
         }
       >
         {linkTitle}
@@ -23,16 +25,33 @@ export function NavListItem({ href, linkTitle }: NavListItemProps) {
 }
 
 export function Layout() {
+  const { pathname } = useLocation();
+
   return (
-    <div className="container">
-      <nav className="main-nav">
-        <ul className="main-nav__list">
-          <NavListItem href="/dev/counter" linkTitle="Counter example" />
-          <NavListItem href="/dev/easy-todo" linkTitle="Todo example" />
-          <NavListItem href="/dev/coffee-app" linkTitle="Coffee app example" />
-        </ul>
-      </nav>
-      <main className="main">
+    <div className={cls["container"]}>
+      <div className={cls["aside-section"]}>
+        <nav className={cls["main-nav"]}>
+          <Title level={3} type="warning" className={cls["title"]}>
+            Navigation
+          </Title>
+          <ul className={cls["main-nav__list"]}>
+            <NavListItem href="/" linkTitle="Counter example" />
+            <NavListItem href="/easy-todo" linkTitle="Todo example" />
+            <NavListItem href="/coffee-app" linkTitle="Coffee app example" />
+          </ul>
+        </nav>
+
+        {pathname === "/coffee-app" && (
+          <div className={cls["cart-section"]}>
+            <Title level={3} type="warning" className={cls["title"]}>
+              Cart
+            </Title>
+            <Cart />
+          </div>
+        )}
+      </div>
+
+      <main className={cls["main"]}>
         <Outlet />
       </main>
     </div>
