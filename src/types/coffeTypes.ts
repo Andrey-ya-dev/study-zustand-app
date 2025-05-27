@@ -12,3 +12,20 @@ export type CoffeType = {
 export type GetCofeeListParams = {
   text?: string;
 };
+
+export type OrderItem = {
+  id: number;
+  name: string;
+  size: "L";
+  quantity: number;
+};
+
+export type OrderCoffeeReq = {
+  address: string;
+  orderItems: OrderItem[];
+};
+
+export type OrderCoffeeRes = {
+  message: string;
+  success: boolean;
+};
