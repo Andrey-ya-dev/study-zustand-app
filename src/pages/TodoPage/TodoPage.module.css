@@ -1,0 +1,16 @@
+.todo__input-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.todo-section {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  margin: 20px auto 0 auto;
+  gap: 12px;
+  max-width: 600px;
+}
