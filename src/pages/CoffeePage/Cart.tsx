@@ -5,7 +5,7 @@ import { useCoffeeStore } from "../../model/coffeeStore";
 import cls from "./CoffeePage.module.css";
 
 export function Cart() {
-  const { cart, clearCart, address, setAddress } = useCoffeeStore();
+  const { cart, clearCart, address, setAddress, sendOrder } = useCoffeeStore();
 
   return (
     <aside className={cls["cart"]}>
@@ -35,7 +35,11 @@ export function Cart() {
       />
 
       <div>
-        <Button type="primary" disabled={!address?.length || !cart?.length}>
+        <Button
+          type="primary"
+          disabled={!address?.length || !cart?.length}
+          onClick={sendOrder}
+        >
           buy coffee
         </Button>
         <Button onClick={clearCart} disabled={!cart?.length}>

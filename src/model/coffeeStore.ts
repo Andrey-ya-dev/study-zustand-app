@@ -1,8 +1,9 @@
 import { create, type StateCreator } from "zustand";
-import { devtools } from "zustand/middleware";
+import { devtools, persist } from "zustand/middleware";
 import type {
   CoffeType,
   GetCofeeListParams,
+  OrderCoffeeRes,
   OrderItem,
 } from "../types/coffeTypes";
 import axios from "axios";
@@ -23,10 +24,14 @@ type CoffeeActions = {
   addCoffeeToCart: (coffee: CoffeType) => void;
   setAddress: (address: string) => void;
   clearCart: () => void;
+  sendOrder: () => void;
 };
 
 // 3. Создаем слайс
-const coffeeSlice: StateCreator<CoffeeState & CoffeeActions> = (set, get) => {
+const coffeeSlice: StateCreator<
+  CoffeeState & CoffeeActions,
+  [["zustand/devtools", never], ["zustand/persist", unknown]]
+> = (set, get) => {
   return {
     coffeeList: [],
     controller: undefined,
@@ -77,10 +82,34 @@ const coffeeSlice: StateCreator<CoffeeState & CoffeeActions> = (set, get) => {
         console.log(err);
       }
     },
+    async sendOrder() {
+      const { cart, address, clearCart } = get();
+
+      try {
+        const { data } = await axios.post<OrderCoffeeRes>(`${BASE_URL}order`, {
+          orderItems: cart,
+          address,
+        });
+
+        if (data.success) {
+          alert(data.message);
+          clearCart();
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    },
   };
 };
 
 // 4. Хук
 export const useCoffeeStore = create<CoffeeState & CoffeeActions>()(
-  devtools(coffeeSlice)
+  devtools(
+    persist(coffeeSlice, {
+      name: "coffeeStore",
+      partialize(state) {
+        return { cart: state.cart, address: state.address };
+      },
+    })
+  )
 );
