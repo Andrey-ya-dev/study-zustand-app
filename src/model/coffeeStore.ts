@@ -20,7 +20,7 @@ type CoffeeState = {
 
 // 2. Тип для экшенов
 type CoffeeActions = {
-  getCoffeeList: (text?: GetCofeeListParams) => void;
+  getCoffeeList: (params?: GetCofeeListParams) => void;
   addCoffeeToCart: (coffee: CoffeType) => void;
   setAddress: (address: string) => void;
   clearCart: () => void;
@@ -74,7 +74,7 @@ const coffeeSlice: StateCreator<
       try {
         const { data } = await axios.get(`${BASE_URL}`, { params, signal });
 
-        set((state) => ({ ...state, coffeeList: [...data] }));
+        set({ coffeeList: data });
       } catch (err) {
         if (axios.isCancel(err)) {
           return;
@@ -113,3 +113,6 @@ export const useCoffeeStore = create<CoffeeState & CoffeeActions>()(
     })
   )
 );
+
+export const getCoffeeList = (params?: GetCofeeListParams) =>
+  useCoffeeStore.getState().getCoffeeList(params);

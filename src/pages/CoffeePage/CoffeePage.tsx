@@ -1,10 +1,11 @@
 import { Input } from "antd";
 import { useCoffeeStore } from "../../model/coffeeStore";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import cls from "./CoffeePage.module.css";
 import { TemplatePage } from "../TemplatePage/TemplatePage";
 import { CoffeeCard } from "./CoffeeCard";
+import { useSearchStore } from "../../model/searchStore";
 
 export type CoffeePageProps = {
   className?: string;
@@ -13,12 +14,7 @@ export type CoffeePageProps = {
 
 export function CoffeePage({ className }: CoffeePageProps) {
   const { coffeeList, getCoffeeList, addCoffeeToCart } = useCoffeeStore();
-  const [searchValue, setSeatchValue] = useState("");
-
-  const handleSearch = (text: string) => {
-    getCoffeeList({ text });
-    setSeatchValue(text);
-  };
+  const { text, setText } = useSearchStore();
 
   useEffect(() => {
     getCoffeeList();
@@ -30,8 +26,8 @@ export function CoffeePage({ className }: CoffeePageProps) {
         <Input
           style={{}}
           placeholder="Search"
-          value={searchValue}
-          onChange={(e) => handleSearch(e.target.value)}
+          value={text}
+          onChange={(e) => setText(e.target.value)}
           className={cls["search-input"]}
         />
       </div>
