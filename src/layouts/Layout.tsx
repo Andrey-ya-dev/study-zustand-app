@@ -35,13 +35,13 @@ export function Layout() {
             Navigation
           </Title>
           <ul className={cls["main-nav__list"]}>
-            <NavListItem href="/" linkTitle="Counter example" />
+            <NavListItem href="/" linkTitle="Coffee app example" />
             <NavListItem href="/easy-todo" linkTitle="Todo example" />
-            <NavListItem href="/coffee-app" linkTitle="Coffee app example" />
+            <NavListItem href="/counter" linkTitle="Counter example" />
           </ul>
         </nav>
 
-        {pathname === "/coffee-app" && (
+        {pathname === "/" && (
           <div className={cls["cart-section"]}>
             <Title level={3} type="warning" className={cls["title"]}>
               Cart

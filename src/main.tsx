@@ -17,15 +17,15 @@ const router = createBrowserRouter([
       {
         index: true,
         path: "/",
-        element: <CounterPage />,
+        element: <CoffeePage />,
       },
       {
         path: "easy-todo",
         element: <TodoPage />,
       },
       {
-        path: "coffee-app",
-        element: <CoffeePage />,
+        path: "counter",
+        element: <CounterPage />,
       },
     ],
   },
