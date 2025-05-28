@@ -16,6 +16,7 @@ type CoffeeState = {
   controller?: AbortController;
   cart?: OrderItem[];
   address?: string;
+  params: GetCofeeListParams;
 };
 
 // 2. Тип для экшенов
@@ -25,6 +26,7 @@ type CoffeeActions = {
   setAddress: (address: string) => void;
   clearCart: () => void;
   sendOrder: () => void;
+  setParams: (params?: GetCofeeListParams) => void;
 };
 
 // 3. Создаем слайс
@@ -37,6 +39,15 @@ const coffeeSlice: StateCreator<
     controller: undefined,
     cart: [],
     address: "",
+    params: {
+      text: "",
+    },
+    setParams(newParams) {
+      const { getCoffeeList, params } = get();
+
+      set({ params: { ...params, ...newParams } });
+      getCoffeeList(params);
+    },
     clearCart() {
       set({ cart: [] });
     },
