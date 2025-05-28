@@ -17,7 +17,7 @@ export function CoffeePage({ className }: CoffeePageProps) {
   const { text, setText } = useSearchStore();
 
   useEffect(() => {
-    getCoffeeList();
+    getCoffeeList({ text });
   }, []);
 
   return (
