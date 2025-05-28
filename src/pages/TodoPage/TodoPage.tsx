@@ -1,10 +1,10 @@
-import { Button, Card, Checkbox, Input, type InputRef } from "antd";
+import { Button, Input, type InputRef } from "antd";
 import { useTodoStore } from "../../model/todoStore";
 import { useRef, useState, type KeyboardEvent } from "react";
-import { CloseOutlined } from "@ant-design/icons";
 import { TemplatePage } from "../TemplatePage/TemplatePage";
 
 import cls from "./TodoPage.module.css";
+import { TodoItem } from "../../components/TodoItem/TodoItem";
 
 export function TodoPage() {
   const { items, addTodo, removeTodo, changeDoneState } = useTodoStore();
@@ -43,30 +43,12 @@ export function TodoPage() {
           {items &&
             items.map((todo) => {
               return (
-                <Card
-                  onClick={() => changeDoneState(todo.id)}
+                <TodoItem
                   key={todo.id}
-                  className={cls["card"]}
-                >
-                  <span>
-                    <Checkbox checked={todo.isDone} />
-                  </span>
-                  <span
-                    style={{
-                      textDecoration: todo.isDone ? "line-through" : "",
-                    }}
-                  >
-                    {todo.title}
-                  </span>
-                  <Button
-                    onClick={() => removeTodo(todo.id)}
-                    style={{
-                      marginLeft: "auto",
-                    }}
-                  >
-                    <CloseOutlined />
-                  </Button>
-                </Card>
+                  removeTodo={removeTodo}
+                  changeDoneState={changeDoneState}
+                  todo={todo}
+                />
               );
             })}
         </div>
