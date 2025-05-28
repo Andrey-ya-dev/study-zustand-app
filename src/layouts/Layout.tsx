@@ -1,28 +1,9 @@
-import { NavLink, Outlet, useLocation } from "react-router";
+import { Outlet, useLocation } from "react-router";
 
 import cls from "./Layouts.module.css";
 import Title from "antd/es/typography/Title";
-import { Cart } from "../pages/CoffeePage/Cart";
-
-type NavListItemProps = {
-  href: string;
-  linkTitle: string;
-};
-
-export function NavListItem({ href, linkTitle }: NavListItemProps) {
-  return (
-    <li className={cls["main-nav__list-item"]}>
-      <NavLink
-        to={`${href}`}
-        className={({ isActive }) =>
-          `${cls["main-nav__list-link"]} ${isActive ? cls["active-link"] : ""}`
-        }
-      >
-        {linkTitle}
-      </NavLink>
-    </li>
-  );
-}
+import { Cart } from "../components/Cart/Cart";
+import { NavMenu } from "../components/NavMenu/NavMenu";
 
 export function Layout() {
   const { pathname } = useLocation();
@@ -34,11 +15,7 @@ export function Layout() {
           <Title level={3} type="warning" className={cls["title"]}>
             Navigation
           </Title>
-          <ul className={cls["main-nav__list"]}>
-            <NavListItem href="/" linkTitle="Coffee app example" />
-            <NavListItem href="/easy-todo" linkTitle="Todo example" />
-            <NavListItem href="/counter" linkTitle="Counter example" />
-          </ul>
+          <NavMenu />
         </nav>
 
         {pathname === "/" && (
