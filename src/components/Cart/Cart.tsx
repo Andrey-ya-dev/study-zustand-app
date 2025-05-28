@@ -1,8 +1,10 @@
 import { Button, Input } from "antd";
 import Title from "antd/es/typography/Title";
 import { useCoffeeStore } from "../../model/coffeeStore";
+import { ShoppingCartOutlined } from "@ant-design/icons";
 
-import cls from "./CoffeePage.module.css";
+import cls from "./Cart.module.css";
+import { CartItem } from "./CartItem";
 
 export function Cart() {
   const { cart, clearCart, address, setAddress, sendOrder } = useCoffeeStore();
@@ -16,16 +18,14 @@ export function Cart() {
           paddingLeft: 20,
         }}
       >
+        <span>
+          <ShoppingCartOutlined />
+        </span>
         Get order
       </Title>
       <div className={cls["cart-list"]}>
         {cart?.map((item) => {
-          return (
-            <div className={cls["cart-item"]} key={item.id}>
-              <span className={cls["cart-item__title"]}>{item.name}</span>
-              <span className={cls["cart-item__count"]}>{item.quantity}</span>
-            </div>
-          );
+          return <CartItem key={item.id} item={item} />;
         })}
       </div>
       <Input

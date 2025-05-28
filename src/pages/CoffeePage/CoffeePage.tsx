@@ -3,7 +3,7 @@ import { useCoffeeStore } from "../../model/coffeeStore";
 
 import cls from "./CoffeePage.module.css";
 import { TemplatePage } from "../TemplatePage/TemplatePage";
-import { CoffeeCard } from "./CoffeeCard";
+import { CoffeeCard } from "../../components/CoffeeCard/CoffeeCard";
 import { useUrlStorage } from "../../helpers/useUrlStorage";
 
 export type CoffeePageProps = {
@@ -20,7 +20,6 @@ export function CoffeePage({ className }: CoffeePageProps) {
     <TemplatePage titleSection="Coffee app">
       <div className={cls["search-input__box"]}>
         <Input
-          style={{}}
           placeholder="Search"
           value={params.text}
           onChange={(e) => setParams({ text: e.target.value })}
