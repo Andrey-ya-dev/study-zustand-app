@@ -21,7 +21,6 @@ export function CoffeeCard({ coffee, addCoffeeToCart }: CoffeeCardProps) {
           icon={<ShoppingCartOutlined />}
           key={coffee.name}
           onClick={() => {
-            console.log("add");
             addCoffeeToCart(coffee);
           }}
         >

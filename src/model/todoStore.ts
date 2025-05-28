@@ -2,13 +2,13 @@ import { type StateCreator } from "zustand";
 import { devtools } from "zustand/middleware";
 import { create } from "../helpers/create";
 
-type TodoType = {
+export type TodoType = {
   id: string;
   title: string;
   isDone: boolean;
 };
 
-type TodoState = {
+export type TodoState = {
   items: TodoType[];
 };
 
@@ -58,7 +58,7 @@ const todoSlice: StateCreator<
       if (todo) {
         todo.isDone = !todo.isDone;
       }
-      // записть данных для стора set
+      // запись данных для стора set
       set((state) => ({ ...state, items: copyItems }));
     },
   };
