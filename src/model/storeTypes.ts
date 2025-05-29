@@ -4,7 +4,13 @@ import type {
   OrderItem,
 } from "../types/coffeTypes";
 
-// 1. Тип для стейта
+export type CofeeCategory =
+  | "all coffee"
+  | "cappuccino"
+  | "latte"
+  | "macchiato"
+  | "americano";
+
 export type CoffeeState = {
   coffeeList: CoffeType[];
   controller?: AbortController;
@@ -12,7 +18,6 @@ export type CoffeeState = {
   params: GetCofeeListParams;
 };
 
-// 2. Тип для экшенов
 export type CoffeeActions = {
   getCoffeeList: (params?: GetCofeeListParams) => void;
 

@@ -4,7 +4,36 @@
 
 ### Стек:
 
-- React, TS, CSS, Zustand, React router, Vite, ES lint, axios, ant-design
+- React, TS, CSS , ES lint, Zustand, React router, Vite, axios, ant-design
+
+<details>
+<summary>Команды для установки с нуля</summary>
+
+### Vite
+
+```
+npm create vite@latest
+```
+
+### Zustand, React Router, Axios
+
+```
+npm install zustand react-router axios
+```
+
+### Ant-design
+
+```
+npm install antd --save
+```
+
+Патч для использования с react 19. (если не пофиксили)
+
+```
+npm install @ant-design/v5-patch-for-react-19 --save
+```
+
+</details>
 
 ## Установка и запуск
 
@@ -33,6 +62,8 @@ npm run preview
 
 ## Возможности приложения
 
+Примеры использования со стейт менеджером zustand
+
 ### Counter example
 
 - Увеличение/уменьшение значения
@@ -53,5 +84,13 @@ npm run preview
 - Добавление в корзину
 - Добавление адреса
 - Отправка заказа
-- Сохранение состояния корзины при перезагрузке
-- Поиск по названию напитков с сохранением состояния в строке поиска
+- Сохранение состояния корзины и адреса при перезагрузке(zustand/persist)
+- Поиск в инпуте по типу напитков с сохранением состояния в строке поиска
+- Поиск напитков по тегу
+
+## Что можно добавить в проект
+
+- Модальное окно с навигацией при небольшом экране
+- Дополнительные темы
+- Storybook
+- Тесты

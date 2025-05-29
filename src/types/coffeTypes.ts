@@ -1,3 +1,5 @@
+import type { CofeeCategory } from "../model/storeTypes";
+
 export type CoffeType = {
   id: number;
   name: string;
@@ -11,6 +13,7 @@ export type CoffeType = {
 
 export type GetCofeeListParams = {
   text?: string;
+  type?: CofeeCategory;
 };
 
 export type OrderItem = {

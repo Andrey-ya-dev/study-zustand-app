@@ -23,7 +23,7 @@ export const coffeeSlice: StateCreator<
     setParams(newParams) {
       const { getCoffeeList, params } = get();
 
-      set({ params: { ...params, ...newParams } });
+      set({ params: { ...params, ...newParams } }, false, "setParams");
       getCoffeeList(params);
     },
     async getCoffeeList(params) {
@@ -34,13 +34,13 @@ export const coffeeSlice: StateCreator<
       }
 
       const newController = new AbortController();
-      set({ controller: newController });
+      set({ controller: newController }, false, "setController");
       const { signal } = newController;
 
       try {
         const { data } = await axios.get(`${BASE_URL}`, { params, signal });
 
-        set({ coffeeList: data });
+        set({ coffeeList: data }, false, "getCoffeeList");
       } catch (err) {
         if (axios.isCancel(err)) {
           return;
