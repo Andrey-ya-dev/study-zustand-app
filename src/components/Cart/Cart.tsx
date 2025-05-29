@@ -1,13 +1,17 @@
 import { Button, Input } from "antd";
 import Title from "antd/es/typography/Title";
-import { useCoffeeStore } from "../../model/coffeeStore";
+import { clearCart, setAddress, useCoffeeStore } from "../../model/coffeeStore";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 
 import cls from "./Cart.module.css";
 import { CartItem } from "./CartItem";
+import { useShallow } from "zustand/shallow";
 
 export function Cart() {
-  const { cart, clearCart, address, setAddress, sendOrder } = useCoffeeStore();
+  const [address, sendOrder] = useCoffeeStore(
+    useShallow((state) => [state.address, state.sendOrder])
+  );
+  const { cart } = useCoffeeStore();
 
   return (
     <aside className={cls["cart"]}>

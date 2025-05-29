@@ -34,6 +34,7 @@ export const cartSlice: StateCreator<
         size: "L",
         quantity: 1,
       };
+
       const coffeeItem = cart?.find((i) => i.id === id);
       if (!coffeeItem) {
         set({ cart: cart ? [...cart, prepearedItem] : [prepearedItem] });
