@@ -1,42 +1,15 @@
-import { Input } from "antd";
-import { useCoffeeStore } from "../../model/coffeeStore";
-
 import cls from "./CoffeePage.module.css";
 import { TemplatePage } from "../TemplatePage/TemplatePage";
-import { CoffeeCard } from "../../components/CoffeeCard/CoffeeCard";
-import { useUrlStorage } from "../../helpers/useUrlStorage";
+import { SearchInput } from "../../components/SearchInput/SearchInput";
+import { CardList } from "../../components/CardList/CardList";
 
-export type CoffeePageProps = {
-  className?: string;
-  test?: string;
-};
-
-export function CoffeePage({ className }: CoffeePageProps) {
-  const { coffeeList, addCoffeeToCart, params, setParams } = useCoffeeStore();
-
-  useUrlStorage(params, setParams);
-
+export function CoffeePage() {
   return (
     <TemplatePage titleSection="Coffee app">
       <div className={cls["search-input__box"]}>
-        <Input
-          placeholder="Search"
-          value={params.text}
-          onChange={(e) => setParams({ text: e.target.value })}
-          className={cls["search-input"]}
-        />
+        <SearchInput />
       </div>
-      {coffeeList && (
-        <div className={`${cls["cards-container"]} ${className || ""}`}>
-          {coffeeList.map((coffee) => (
-            <CoffeeCard
-              coffee={coffee}
-              key={coffee.id}
-              addCoffeeToCart={addCoffeeToCart}
-            />
-          ))}
-        </div>
-      )}
+      <CardList />
     </TemplatePage>
   );
 }

@@ -2,14 +2,14 @@ import { Button, Card, Rate, Tag } from "antd";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 
 import type { CoffeType } from "../../types/coffeTypes";
+import { addCoffeeToCart } from "../../model/coffeeStore";
 
 export type CoffeeCardProps = {
   className?: string;
   coffee: CoffeType;
-  addCoffeeToCart: (coffee: CoffeType) => void;
 };
 
-export function CoffeeCard({ coffee, addCoffeeToCart }: CoffeeCardProps) {
+export function CoffeeCard({ coffee }: CoffeeCardProps) {
   return (
     <Card
       style={{ maxWidth: 440 }}
