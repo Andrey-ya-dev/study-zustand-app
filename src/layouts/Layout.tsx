@@ -1,9 +1,9 @@
 import { Outlet, useLocation } from "react-router";
 
 import cls from "./Layouts.module.css";
-import Title from "antd/es/typography/Title";
 import { Cart } from "../components/Cart/Cart";
 import { NavMenu } from "../components/NavMenu/NavMenu";
+import { SectionTemplate } from "../components/SectionTemplate/SectionTemplate";
 
 export function Layout() {
   const { pathname } = useLocation();
@@ -12,19 +12,15 @@ export function Layout() {
     <div className={cls["container"]}>
       <div className={cls["aside-section"]}>
         <nav className={cls["main-nav"]}>
-          <Title level={3} type="warning" className={cls["title"]}>
-            Navigation
-          </Title>
-          <NavMenu />
+          <SectionTemplate sectionTitle="Navigation">
+            <NavMenu />
+          </SectionTemplate>
         </nav>
 
         {pathname === "/" && (
-          <div className={cls["cart-section"]}>
-            <Title level={3} type="warning" className={cls["title"]}>
-              Cart
-            </Title>
+          <SectionTemplate sectionTitle="Cart">
             <Cart />
-          </div>
+          </SectionTemplate>
         )}
       </div>
 

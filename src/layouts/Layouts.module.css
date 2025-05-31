@@ -40,4 +40,8 @@
   .container {
     grid-template-columns: minmax(min-content, 230px) 2fr;
   }
+
+  .burger-menu {
+    display: none;
+  }
 }
