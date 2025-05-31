@@ -2,12 +2,12 @@ import { Tag } from "antd";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 
 import cls from "./TemplatePage.module.css";
+import { useCoffeeStore } from "../../model/coffeeStore";
+import { useShallow } from "zustand/shallow";
 
-interface CartTagProps {
-  cartCount?: number;
-}
+export function CartTag() {
+  const [cartCount] = useCoffeeStore(useShallow((state) => [state.cartCount]));
 
-export function CartTag({ cartCount = 0 }: CartTagProps) {
   return (
     <Tag color="green" className={cls["cart__info"]}>
       <ShoppingCartOutlined />

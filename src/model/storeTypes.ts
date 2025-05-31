@@ -27,6 +27,7 @@ export type CoffeeActions = {
 export type CartState = {
   cart?: OrderItem[];
   address?: string;
+  cartCount?: number;
 };
 
 export type CartActions = {
@@ -34,4 +35,5 @@ export type CartActions = {
   setAddress: (address: string) => void;
   clearCart: () => void;
   sendOrder: () => void;
+  calculateCount: () => void;
 };

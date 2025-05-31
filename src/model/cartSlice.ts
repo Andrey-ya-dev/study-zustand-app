@@ -19,14 +19,24 @@ export const cartSlice: StateCreator<
   return {
     cart: [],
     address: "",
+    cartCount: 0,
     clearCart() {
-      set({ cart: [] });
+      set({ cart: [], cartCount: 0 });
+    },
+    calculateCount() {
+      const { cart } = get();
+
+      const count = cart?.reduce((acc, cartItem) => {
+        return acc + cartItem.quantity;
+      }, 0);
+
+      set({ cartCount: count });
     },
     setAddress(address) {
       set({ address });
     },
     addCoffeeToCart(coffee) {
-      const { cart } = get();
+      const { cart, calculateCount } = get();
       const { id, name, subTitle } = coffee;
       const prepearedItem: OrderItem = {
         id,
@@ -38,9 +48,11 @@ export const cartSlice: StateCreator<
       const coffeeItem = cart?.find((i) => i.id === id);
       if (!coffeeItem) {
         set({ cart: cart ? [...cart, prepearedItem] : [prepearedItem] });
+        calculateCount();
       } else {
         coffeeItem.quantity = coffeeItem.quantity + 1;
         set({ cart });
+        calculateCount();
       }
     },
     async sendOrder() {
