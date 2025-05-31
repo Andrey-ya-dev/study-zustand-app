@@ -87,3 +87,13 @@ textarea:not([rows]) {
 :target {
   scroll-margin-block: 5ex;
 }
+
+@media (min-width: 769px) {
+  .burger-menu {
+    display: none;
+  }
+
+  .modal {
+    display: none;
+  }
+}
